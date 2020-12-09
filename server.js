@@ -1,19 +1,22 @@
+require("dotenv").config();
+
 const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");
 const { createRequestHandler } = require("@remix-run/express");
+const cookieParser = require("cookie-parser");
+const { retrieveToken, STRAVA_TOKEN_COOKIE_NAME } = require("./tokenUtils");
 
-let app = express();
+const app = express();
+app.disable("x-powered-by");
 
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
 app.use(express.static("public"));
+app.use(cookieParser());
 
-// Sessions are optional. If you don't want them, just remove this middleware.
-// Otherwise, you should configure it with a session store other than the memory
-// store so they persist. See https://www.npmjs.com/package/express-session
 app.use(
     session({
         secret: "r3mixR0x",
@@ -23,20 +26,32 @@ app.use(
     }),
 );
 
+app.get("/delete-cookie", (_, res) => {
+    res.clearCookie(STRAVA_TOKEN_COOKIE_NAME);
+    res.redirect("/");
+});
+
+app.get("/auth", async (req, res) => {
+    const { code, scope } = req.query;
+    try {
+        res.cookie(STRAVA_TOKEN_COOKIE_NAME, JSON.stringify(await retrieveToken({ code, scope })), { httpOnly: true });
+        res.redirect(req.session.lastRequestPath || "/");
+    } catch (ex) {
+        session.errorMessage = "There was a problem logging in";
+        res.redirect("/");
+    }
+});
+
 app.all(
     "*",
     createRequestHandler({
-        // Uncomment the following line if you don't want sessions. This will
-        // disable the warning message when no session middleware is present.
-        //enableSessions: false,
-        getLoadContext() {
-            // Whatever you return here will be passed as `context` to your loaders
-            // and actions.
+        getLoadContext(req, res) {
+            return { req, res };
         },
     }),
 );
 
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`Express server started on http://localhost:${port}`);

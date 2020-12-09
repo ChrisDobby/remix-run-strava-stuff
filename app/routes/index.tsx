@@ -1,23 +1,19 @@
 import React from "react";
-import { useRouteData } from "@remix-run/react";
+import { Link, useRouteData } from "@remix-run/react";
 
 export function meta() {
     return {
-        title: "Remix Strava Stuff",
-        description: "Do some things with Strava data - built with Remix!",
+        title: "Strava Stuff",
     };
 }
 
 export default function Index() {
-    let data = useRouteData();
+    const { isAuthenticated } = useRouteData();
 
     return (
         <div style={{ textAlign: "center", padding: 20 }}>
-            <h2>Welcome to Remix!</h2>
-            <p>
-                <a href="https://remix.run/dashboard/docs">Check out the docs</a> to get started.
-            </p>
-            <p>Message from the loader: {data.message}</p>
+            <h2>Welcome to some Strava stuff!</h2>
+            <Link to="/athlete">{isAuthenticated ? "View activities" : "Log in to Strava"}</Link>
         </div>
     );
 }
