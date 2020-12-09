@@ -1,7 +1,9 @@
 import type { DataLoader } from "@remix-run/core";
+import { hasStravaAuth } from "../auth";
 
-export let loader: DataLoader = async () => {
+export const loader: DataLoader = async ({ context }) => {
+    const { req } = context;
     return {
-        message: "this is awesome 😎",
+        isAuthenticated: hasStravaAuth(req),
     };
 };
