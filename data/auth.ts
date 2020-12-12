@@ -1,4 +1,4 @@
-import type { DataLoader } from "@remix-run/core";
+import type { Loader } from "@remix-run/data";
 import { redirect } from "@remix-run/data";
 import url from "url";
 import FormData from "form-data";
@@ -40,10 +40,10 @@ async function refreshAuth(auth: StravaAuth) {
     return { ...stravaJson, scope };
 }
 
-export function withAuth(loader: DataLoader): DataLoader {
+export function withAuth(loader: Loader): Loader {
     return async args => {
         const {
-            context: { req, res },
+            context: { req, res, port },
             session,
             request,
         } = args;
@@ -53,7 +53,7 @@ export function withAuth(loader: DataLoader): DataLoader {
             const { path, host, protocol } = url.parse((request as Request).url);
             session.set("lastRequestPath", path ?? "/");
             return redirect(
-                `${STRAVA_AUTHORISE_URL}?client_id=${STRAVA_CLIENT_ID}&redirect_uri=${protocol}//${host}/auth&response_type=code&approval_prompt=auto&scope=activity:read_all,activity:write`,
+                `${STRAVA_AUTHORISE_URL}?client_id=${STRAVA_CLIENT_ID}&redirect_uri=${protocol}//${host}:${port}/auth&response_type=code&approval_prompt=auto&scope=activity:read_all,activity:write`,
             );
         }
 

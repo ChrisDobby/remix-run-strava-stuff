@@ -6,6 +6,7 @@ const session = require("express-session");
 const { createRequestHandler } = require("@remix-run/express");
 const cookieParser = require("cookie-parser");
 const { retrieveToken, STRAVA_TOKEN_COOKIE_NAME } = require("./tokenUtils");
+const port = process.env.PORT || 3000;
 
 const app = express();
 app.disable("x-powered-by");
@@ -46,12 +47,10 @@ app.all(
     "*",
     createRequestHandler({
         getLoadContext(req, res) {
-            return { req, res };
+            return { req, res, port };
         },
     }),
 );
-
-const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`Express server started on http://localhost:${port}`);

@@ -1,6 +1,6 @@
-import type { DataLoader } from "@remix-run/core";
+import type { Loader } from "@remix-run/data";
 
-export const loader: DataLoader = async () => {
+export const loader: Loader = async () => {
     return {
         date: new Date(),
     };

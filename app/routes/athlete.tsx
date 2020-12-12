@@ -1,5 +1,4 @@
 import { useRouteData } from "@remix-run/react";
-import * as React from "react";
 
 type Activity = {
     id: number;

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useRouteData } from "@remix-run/react";
 
 export function meta() {
