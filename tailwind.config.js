@@ -1,5 +1,5 @@
 module.exports = {
-    purge: ["./app/**/*.js"],
+    purge: process.env.NODE_ENV === "production" ? ["./app/**/*.ts", "./app/**/*.tsx"] : [],
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {},
