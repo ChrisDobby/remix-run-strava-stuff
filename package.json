@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "tsc -b",
-    "build": "remix build && tsc -b",
-    "dev": "concurrently \"remix run\" \"tsc -b -w --preserveWatchOutput\" \"cross-env NODE_ENV=development nodemon -w app -w build -w data-build -e js,jsx,ts,tsx,md,mdx server.js\"",
-    "start": "node server.js"
+    "build": "cross-env NODE_ENV=production yarn run css:build && remix build && tsc -b",
+    "dev": "concurrently \"yarn run css:watch\" \"remix run\" \"tsc -b -w --preserveWatchOutput\" \"cross-env NODE_ENV=development nodemon -w app -w build -w data-build -e js,jsx,ts,tsx,md,mdx server.js\"",
+    "start": "node server.js",
+    "css:watch": "postcss styles --base styles --dir app/ -w",
+    "css:build": "postcss styles --base styles --dir app/ --env production"
   },
   "dependencies": {
     "@remix-run/cli": "^0.8.1",
@@ -23,11 +25,13 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router": "^6.0.0-beta.0",
-    "react-router-dom": "^6.0.0-beta.0"
+    "react-router-dom": "^6.0.0-beta.0",
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "autoprefixer": "^10.1.0",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
     "eslint": "^7.14.0",
@@ -37,6 +41,7 @@
     "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-react": "^7.21.5",
     "nodemon": "^2.0.5",
+    "postcss-cli": "^8.3.1",
     "prettier": "^2.2.1",
     "typescript": "^4.0.3"
   },
