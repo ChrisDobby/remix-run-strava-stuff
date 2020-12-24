@@ -1,4 +1,6 @@
-import { Link, useRouteData } from "@remix-run/react";
+import { useRouteData } from "@remix-run/react";
+import { Outlet } from "react-router";
+import NavBar from "../navBar";
 
 export function meta() {
     return {
@@ -10,9 +12,11 @@ export default function Index() {
     const { isAuthenticated } = useRouteData();
 
     return (
-        <div style={{ textAlign: "center", padding: 20 }}>
-            <h2>Welcome to some Strava stuff!</h2>
-            <Link to="/athlete">{isAuthenticated ? "View activities" : "Log in to Strava"}</Link>
+        <div className="flex flex-col h-screen overflow-hidden">
+            <NavBar isAuthenticated={isAuthenticated} />
+            <div className="flex-1 h-full overflow-hidden">
+                <Outlet />
+            </div>
         </div>
     );
 }
