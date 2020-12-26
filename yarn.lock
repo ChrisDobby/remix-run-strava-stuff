@@ -1203,6 +1203,11 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@types/dateformat@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-3.0.1.tgz#98d747a2e5e9a56070c6bf14e27bff56204e34cc"
+  integrity sha512-KlPPdikagvL6ELjWsljbyDIPzNCeliYkqRpI+zea99vBBbCIA5JNshZAwQKTON139c87y9qvTFVgkFd14rtS4g==
+
 "@types/estree@*":
   version "0.0.45"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.45.tgz#e9387572998e5ecdac221950dab3e8c3b16af884"
@@ -2017,6 +2022,11 @@ date-fns@^2.0.1:
   version "2.16.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
   integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
+
+dateformat@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.4.0.tgz#f31b34a60337a1dc61828f043431cea64283281c"
+  integrity sha512-DWHU66U5jrpT5Z7+m0iC9iRk9mnzRRBaVXTJ4nXxcfHb4Squ5cl93gS3DcSiJCQpw4I8ZJdxl7XnXBhIdFSKgg==
 
 debug@2.6.9, debug@^2.2.0:
   version "2.6.9"
