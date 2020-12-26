@@ -20,13 +20,13 @@ export default function AthleteHeader({
                     <img className="h-8 w-8 rounded-full mr-2" src={profile} />
                     <h2 className="text-2xl font-bold leading-7 text-gray-900">{`${firstname} ${lastname}`}</h2>
                 </div>
-                <div className="mt-1 flex flex-col">
-                    <div className="mt-2 flex items-center text-sm text-gray-500">Last four weeks</div>
-                    <div className="mt-2 flex items-center text-sm text-gray-500">
+                <div className="mt-1 flex xl:flex-col">
+                    <div className="mt-2 flex items-center text-sm text-gray-500 mr-3">Last four weeks</div>
+                    <div className="mt-2 flex items-center text-sm text-gray-500 mr-3">
                         <RunIcon />
                         {distanceInKm(recentRunDistance)}
                     </div>
-                    <div className="mt-2 flex items-center text-sm text-gray-500">
+                    <div className="mt-2 flex items-center text-sm text-gray-500 mr-3">
                         <RideIcon />
                         {distanceInKm(recentRideDistance)}
                     </div>

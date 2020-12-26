@@ -18,14 +18,14 @@ export default function Athlete() {
     const { pathname } = useLocation();
 
     return (
-        <div className="grid grid-cols-4 h-full overflow-hidden">
-            <div className="col-start-1 border-r-2 border-gray-200">
+        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 grid-rows-hlb md:grid-rows-hb xl:grid-rows-1 h-full overflow-hidden">
+            <div className="col-start-1 col-end-4 xl:col-end-2 row-start-1 border-b-2 xl:border-b-0 xl:border-r-2 border-gray-200 mb-2 xl:mb-0">
                 <Header {...athlete} {...stats} />
             </div>
-            <div className="col-start-2 border-r-2 border-gray-200 h-full overflow-y-auto">
+            <div className="col-start-1 xl:col-start-2 row-start-2 xl:row-start-1 border-b-2 md:border-b-0 md:border-r-2 border-gray-200 h-full overflow-y-auto mb-2 md:mb-0">
                 <ActivityList actvities={activities} currentPath={pathname} />
             </div>
-            <div className="col-start-3 col-end-5 h-full overflow-y-auto">
+            <div className="col-start-1 md:col-start-2 xl:col-start-3 col-end-4 xl:col-end-5 row-start-3 md:row-start-2 xl:row-start-1 h-full overflow-y-auto">
                 <Outlet />
             </div>
         </div>
