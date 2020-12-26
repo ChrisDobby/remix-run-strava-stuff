@@ -31,8 +31,8 @@ function SplitLine({ split }: { split: StravaActivitySplit }) {
             <div className="text-xs text-gray-600">{split.split}</div>
             <div className="text-xs text-gray-700">{timeFromSeconds(split.moving_time)}</div>
             <div className="text-xs text-gray-700">{`${split.elevation_difference} m`}</div>
-            <div className="text-xs text-gray-700">{averageSpeed}</div>
             <div className="text-xs text-gray-700">{averagePace}</div>
+            <div className="text-xs text-gray-700">{averageSpeed}</div>
         </>
     );
 }
