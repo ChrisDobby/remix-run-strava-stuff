@@ -1,4 +1,4 @@
-import type { Loader } from "@remix-run/data";
+import { json, Loader } from "@remix-run/data";
 import { withAuth } from "../../auth";
 
 export const loader: Loader = withAuth(async ({ context: { stravaAuth } }) => {
@@ -12,7 +12,7 @@ export const loader: Loader = withAuth(async ({ context: { stravaAuth } }) => {
         const activities = await activitiesResponse.json();
         const statsResponse = await fetch(`https://www.strava.com/api/v3/athletes/${athlete.id}/stats`, { headers });
         const stats = await statsResponse.json();
-        return { athlete, stats, activities };
+        return json({ athlete, stats, activities }, { headers: { "cache-control": "max-age=60" } });
     } catch (ex) {
         return ex;
     }

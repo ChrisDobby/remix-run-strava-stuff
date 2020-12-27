@@ -31,3 +31,9 @@ export default function Athlete() {
         </div>
     );
 }
+
+export function headers({ loaderHeaders }: { loaderHeaders: Headers }) {
+    return {
+        "cache-control": loaderHeaders.get("cache-control"),
+    };
+}
