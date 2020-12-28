@@ -10,6 +10,14 @@ It will allow users to login to Strava and do some stuff (as yet unspecified!) w
 - [nodejs](https://nodejs.org)
 - [yarn](https://yarnpkg.com)
 
+## Environment Variables
+
+The following environment variables will need to be available - recommend using a .env file
+
+`STRAVA_CLIENT_ID`
+`STRAVA_CLIENT_SECRET`
+Values for these variables can be obtained from [Strava API settings](https://www.strava.com/settings/api)
+
 ## Development
 
 You will need a [Remix](https://remix.run) license key and you can follow the instructions for how to use that from your [Remix dashboard](https://remix.run)
