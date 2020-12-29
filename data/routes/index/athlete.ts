@@ -12,7 +12,7 @@ export const loader: Loader = withAuth(async ({ context: { stravaAuth } }) => {
         const activities = await activitiesResponse.json();
         const statsResponse = await fetch(`https://www.strava.com/api/v3/athletes/${athlete.id}/stats`, { headers });
         const stats = await statsResponse.json();
-        return json({ athlete, stats, activities }, { headers: { "cache-control": "max-age=60" } });
+        return json({ athlete, stats, activities }, { headers: { "cache-control": "max-age=3600" } });
     } catch (ex) {
         return ex;
     }

@@ -9,3 +9,9 @@ export default function ActivityId() {
         </div>
     );
 }
+
+export function headers({ loaderHeaders }: { loaderHeaders: Headers }) {
+    return {
+        "cache-control": loaderHeaders.get("cache-control"),
+    };
+}
