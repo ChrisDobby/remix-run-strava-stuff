@@ -79,9 +79,9 @@ export default function Activity({ activity }: Props) {
                 <ActivitySectionHeader>Elevation</ActivitySectionHeader>
                 <ActivityHeading>Elevation gain</ActivityHeading>
                 <ActivityDetail>{`${activity.total_elevation_gain} m`}</ActivityDetail>
-                <ActivityHeading>Min elevation</ActivityHeading>
-                <ActivityDetail>{`${activity.elev_high} m`}</ActivityDetail>
                 <ActivityHeading>Max elevation</ActivityHeading>
+                <ActivityDetail>{`${activity.elev_high} m`}</ActivityDetail>
+                <ActivityHeading>Min elevation</ActivityHeading>
                 <ActivityDetail>{`${activity.elev_low} m`}</ActivityDetail>
                 <ActivitySectionHeader>Splits</ActivitySectionHeader>
             </div>

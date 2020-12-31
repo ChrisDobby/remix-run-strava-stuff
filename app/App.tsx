@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 
 export default function App() {
     const { pathname } = useLocation();
-    const includeScripts = pathname === "/athlete";
+    const includeScripts = pathname.startsWith("/athlete");
     return (
         <html lang="en">
             <head>
