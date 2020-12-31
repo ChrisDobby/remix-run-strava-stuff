@@ -37,3 +37,8 @@ export function headers({ loaderHeaders }: { loaderHeaders: Headers }) {
         "cache-control": loaderHeaders.get("cache-control"),
     };
 }
+
+export function meta({ data }: { data: AthleteData }) {
+    const { athlete } = data;
+    return { title: `${athlete.firstname} ${athlete.lastname} Strava profile` };
+}
