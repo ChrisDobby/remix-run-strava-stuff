@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import { StravaActivitySummary } from "../types";
@@ -14,6 +15,25 @@ const selectedLiClassName = "bg-gray-500 border-transparent shadow-lg group bloc
 type Props = { actvities: StravaActivitySummary[]; currentPath: string };
 
 export default function ActivityList({ actvities, currentPath }: Props) {
+    const selectedItemRef = React.useRef<HTMLDivElement>(null);
+
+    React.useLayoutEffect(() => {
+        if (!selectedItemRef.current) {
+            return;
+        }
+
+        const selectedItem = selectedItemRef.current;
+        const { bottom: selectedItemBottom, top: selectedItemTop } = selectedItem.getBoundingClientRect();
+        const scrollContainer = selectedItem.parentElement?.parentElement?.parentElement;
+        const selectedItemNotVisible =
+            scrollContainer &&
+            (selectedItemTop < scrollContainer.offsetTop ||
+                selectedItemBottom > scrollContainer.offsetTop + scrollContainer.offsetHeight);
+        if (selectedItemNotVisible) {
+            selectedItem.scrollIntoView();
+        }
+    }, []);
+
     return (
         <ul className="grid grid-cols-1 gap-4 p-2">
             {actvities.map(activity => {
@@ -44,7 +64,11 @@ export default function ActivityList({ actvities, currentPath }: Props) {
 
                 return (
                     <li key={id} className={isSelected ? selectedLiClassName : unselectedLiClassName}>
-                        {isSelected ? item : <ActivityLink to={`/athlete/activity/${id}`}>{item}</ActivityLink>}
+                        {isSelected ? (
+                            <div ref={selectedItemRef}>{item}</div>
+                        ) : (
+                            <ActivityLink to={`/athlete/activity/${id}`}>{item}</ActivityLink>
+                        )}
                     </li>
                 );
             })}
