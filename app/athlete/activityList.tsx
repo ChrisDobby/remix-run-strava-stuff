@@ -39,7 +39,7 @@ export default function ActivityList({ actvities, currentPath }: Props) {
             {actvities.map(activity => {
                 const { id, name, type, distance, start_date_local, total_elevation_gain } = activity;
                 const path = `/athlete/activity/${id}`;
-                const isSelected = path === currentPath;
+                const isSelected = currentPath.startsWith(path);
                 const item = (
                     <dl className="grid grid-cols-1 grid-rows-2 items-center p-4">
                         <div className={`flex ${isSelected ? "text-white" : "text-black group-hover:text-white"}`}>

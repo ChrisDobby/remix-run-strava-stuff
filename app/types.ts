@@ -20,6 +20,7 @@ export type ActivityType = "Run" | "Ride" | "Swim";
 export type StravaActivitySummary = {
     id: number;
     name: string;
+    description: string;
     type: ActivityType;
     start_date_local: string;
     distance: number;
