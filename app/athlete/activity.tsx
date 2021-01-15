@@ -1,6 +1,4 @@
-import dateFormat from "dateformat";
 import { StravaActivity, StravaActivitySplit } from "../types";
-import { ActivityIcon } from "./icons";
 import { calculateSpeedAndPace, timeFromSeconds } from "./utils";
 
 type ChildrenProps = { children?: React.ReactNode | React.ReactNodeArray };
@@ -45,17 +43,6 @@ export default function Activity({ activity }: Props) {
 
     return (
         <>
-            <div className="border-gray-200 border-b pb-2">
-                <div className="text-2xl text-gray-800 font-bold flex items-center">
-                    <ActivityIcon type={activity.type} /> {activity.name}
-                </div>
-                <div className="text-lg text-gray-500 font-bold">
-                    {`${dateFormat(activity.start_date_local, "dd mmm yyyy")} at ${dateFormat(
-                        activity.start_date_local,
-                        "HH:MM",
-                    )} for ${timeFromSeconds(activity.moving_time)}`}
-                </div>
-            </div>
             <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                 <ActivitySectionHeader>Pace</ActivitySectionHeader>
                 <ActivityHeading>Average pace</ActivityHeading>
