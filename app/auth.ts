@@ -43,7 +43,7 @@ async function refreshAuth(auth: StravaAuth) {
 export function withAuth(loader: DataLoader): DataLoader {
     return async args => {
         const {
-            context: { req, res },
+            context: { req, res, port },
             session,
             request,
         } = args;
@@ -53,7 +53,7 @@ export function withAuth(loader: DataLoader): DataLoader {
             const { path, host, protocol } = url.parse((request as Request).url);
             session.set("lastRequestPath", path ?? "/");
             return redirect(
-                `${STRAVA_AUTHORISE_URL}?client_id=${STRAVA_CLIENT_ID}&redirect_uri=${protocol}//${host}/auth&response_type=code&approval_prompt=auto&scope=activity:read_all,activity:write`,
+                `${STRAVA_AUTHORISE_URL}?client_id=${STRAVA_CLIENT_ID}&redirect_uri=${protocol}//${host}:${port}/auth&response_type=code&approval_prompt=auto&scope=activity:read_all,activity:write`,
             );
         }
 
