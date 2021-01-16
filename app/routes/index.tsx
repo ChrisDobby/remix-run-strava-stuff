@@ -1,8 +1,8 @@
 import { Link, useRouteData } from "@remix-run/react";
-import type { DataLoader } from "@remix-run/core";
+import type { Loader } from "@remix-run/data";
 import { hasStravaAuth } from "../auth";
 
-export const loader: DataLoader = async ({ context }) => {
+export const loader: Loader = async ({ context }) => {
     const { req } = context;
     return {
         isAuthenticated: hasStravaAuth(req),
