@@ -24,20 +24,38 @@ function hasTokenExpired(expiry: number) {
     return secondsSinceEpoch > expiry;
 }
 
-async function refreshAuth(auth: StravaAuth) {
-    const { refresh_token, scope } = auth;
+type RetrieveTokenArgs = {
+    scope: string;
+    code?: string;
+    refreshToken?: string;
+};
+
+async function retrieveToken({ scope, code, refreshToken }: RetrieveTokenArgs) {
     const formData = new FormData();
     formData.append("client_id", STRAVA_CLIENT_ID);
     formData.append("client_secret", STRAVA_CLIENT_SECRET);
-    formData.append("refresh_token", refresh_token);
-    formData.append("grant_type", "refresh_token");
+    if (code) {
+        formData.append("code", code);
+        console.log(`code = ${code}`);
+    }
 
+    if (refreshToken) {
+        formData.append("refresh_token", refreshToken);
+        console.log(`refresh_token = ${refreshToken}`);
+    }
+
+    formData.append("grant_type", refreshToken ? "refresh_token" : "authorization_code");
     const stravaResponse = await fetch(STRAVA_TOKEN_URL, {
         method: "POST",
         body: formData as any,
     });
     const { athlete, ...stravaJson } = await stravaResponse.json();
     return { ...stravaJson, scope };
+}
+
+async function refreshAuth(auth: StravaAuth) {
+    const { refresh_token: refreshToken, scope } = auth;
+    return retrieveToken({ scope, refreshToken });
 }
 
 export function withAuth(loader: Loader): Loader {
@@ -68,4 +86,17 @@ export function withAuth(loader: Loader): Loader {
 
 export function hasStravaAuth(req: RequestWithCookies) {
     return Boolean(getAuth(req));
+}
+
+type SetCookieArgs = {
+    code: string;
+    scope: string;
+    res: { cookie: (name: string, data: string, options: any) => void };
+};
+export async function setTokenCookie({ code, scope, res }: SetCookieArgs) {
+    res.cookie(STRAVA_TOKEN_COOKIE_NAME, JSON.stringify(await retrieveToken({ scope, code })), { httpOnly: true });
+}
+
+export function removeTokenCookie(res: { clearCookie: (name: string) => void }) {
+    res.clearCookie(STRAVA_TOKEN_COOKIE_NAME);
 }
