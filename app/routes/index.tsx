@@ -1,6 +1,15 @@
 import { useRouteData } from "@remix-run/react";
 import { Outlet } from "react-router";
 import NavBar from "../navBar";
+import type { Loader } from "@remix-run/data";
+import { hasStravaAuth } from "../auth";
+
+export const loader: Loader = async ({ context }) => {
+    const { req } = context;
+    return {
+        isAuthenticated: hasStravaAuth(req),
+    };
+};
 
 export function meta() {
     return {
