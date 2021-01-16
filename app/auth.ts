@@ -36,12 +36,10 @@ async function retrieveToken({ scope, code, refreshToken }: RetrieveTokenArgs) {
     formData.append("client_secret", STRAVA_CLIENT_SECRET);
     if (code) {
         formData.append("code", code);
-        console.log(`code = ${code}`);
     }
 
     if (refreshToken) {
         formData.append("refresh_token", refreshToken);
-        console.log(`refresh_token = ${refreshToken}`);
     }
 
     formData.append("grant_type", refreshToken ? "refresh_token" : "authorization_code");
