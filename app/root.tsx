@@ -1,5 +1,5 @@
-import { Meta, Scripts, Styles, Routes } from "@remix-run/react";
-import { useLocation } from "react-router";
+import { Meta, Scripts, Styles } from "@remix-run/react";
+import { Outlet, useLocation } from "react-router";
 
 export default function App() {
     const { pathname } = useLocation();
@@ -12,7 +12,7 @@ export default function App() {
                 <Styles />
             </head>
             <body>
-                <Routes />
+                <Outlet />
                 {includeScripts && <Scripts />}
             </body>
         </html>
