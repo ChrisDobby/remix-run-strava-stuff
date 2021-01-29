@@ -1,8 +1,7 @@
-import { Meta, Styles, Routes, useGlobalData } from "@remix-run/react";
+import { Meta, Styles } from "@remix-run/react";
+import { Outlet } from "react-router-dom";
 
 export default function App() {
-    const data = useGlobalData();
-
     return (
         <html lang="en">
             <head>
@@ -11,7 +10,7 @@ export default function App() {
                 <Styles />
             </head>
             <body>
-                <Routes />
+                <Outlet />
                 {/* <Scripts /> */}
             </body>
         </html>
