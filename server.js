@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const express = require("express");
 const morgan = require("morgan");
-const session = require("express-session");
 const { createRequestHandler } = require("@remix-run/express");
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 3000;
@@ -16,15 +15,6 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.static("public"));
 app.use(cookieParser());
-
-app.use(
-    session({
-        secret: "r3mixR0x",
-        resave: false,
-        saveUninitialized: true,
-        sameSite: true,
-    }),
-);
 
 app.all(
     "*",
