@@ -1,6 +1,5 @@
 import type { LinksFunction } from "@remix-run/react";
 import { Meta, Scripts, Links } from "@remix-run/react";
-import { useLocation } from "react-router";
 import { Outlet, useLocation } from "react-router-dom";
 import tailwind from "css:./styles/tailwind.css";
 import styles from "css:./styles/global.css";
