@@ -1,4 +1,5 @@
-import { Meta, Scripts, LinksFunction } from "@remix-run/react";
+import type { LinksFunction } from "@remix-run/react";
+import { Meta, Scripts, Links } from "@remix-run/react";
 import { useLocation } from "react-router";
 import { Outlet } from "react-router-dom";
 import tailwind from "css:./styles/tailwind.css";
@@ -19,6 +20,7 @@ export default function App() {
             <head>
                 <meta charSet="utf-8" />
                 <Meta />
+                <Links />
             </head>
             <body>
                 <Outlet />
