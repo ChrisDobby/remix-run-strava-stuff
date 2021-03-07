@@ -5,9 +5,8 @@ import { StravaActivitySummary, StravaAthlete, StravaAthleteStats } from "../../
 import { json, Loader } from "@remix-run/data";
 import { withAuth } from "../../auth";
 
-export const loader: Loader = withAuth(async ({ context: { stravaAuth } }) => {
+export const loader: Loader = withAuth(async ({ context: { headers } }) => {
     try {
-        const headers = { Authorization: `Bearer ${stravaAuth.access_token}` };
         const [athleteResponse, activitiesResponse] = await Promise.all([
             fetch("https://www.strava.com/api/v3/athlete", { headers }),
             fetch("https://www.strava.com/api/v3/athlete/activities", { headers }),
