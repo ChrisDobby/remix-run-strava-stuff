@@ -1,6 +1,12 @@
+import type { LinksFunction } from "@remix-run/react";
 import { useRouteData } from "@remix-run/react";
 import type { Loader } from "@remix-run/data";
 import { withAuth } from "../auth";
+import styles from "css:../styles/athlete.css";
+
+export const links: LinksFunction = () => {
+    return [{ rel: "stylesheet", href: styles }];
+};
 
 export const loader: Loader = withAuth(({ context: { stravaAuth } }) =>
     fetch("https://www.strava.com/api/v3/athlete/activities", {
