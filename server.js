@@ -17,6 +17,7 @@ app.use(express.static("public"));
 app.all(
     "*",
     createRequestHandler({
+        build: require("./build"),
         getLoadContext(req, res) {
             return { req, res };
         },
